@@ -39,8 +39,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Publish 2026.1
-        run: ./gradlew publishPlugin -DIDEA_VER=2026.1
+      - name: Publish 2026.2
+        run: ./gradlew publishPlugin -DIDEA_VER=2026.2
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4.6.2

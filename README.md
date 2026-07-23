@@ -98,7 +98,7 @@ QQ交流群：1群：`29850775` 2群：`529914962`
         
 ## Building
 
-  `./gradlew buildPlugin -DIDEA_VER=2026.1`
+  `./gradlew buildPlugin -DIDEA_VER=2026.2`
 
 ## Developed By
 
