@@ -38,7 +38,8 @@ data class BuildData(
     val explicitJavaDependency: Boolean = true,
     val bunch: String = ideaSDKShortVersion,
     // https://github.com/JetBrains/gradle-intellij-plugin/issues/403#issuecomment-542890849
-    val instrumentCodeCompilerVersion: String = ideaSDKVersion
+    val instrumentCodeCompilerVersion: String = ideaSDKVersion,
+    val jdkVersion: Int = 21
 )
 
 val buildDataList = listOf(
@@ -49,7 +50,8 @@ val buildDataList = listOf(
         untilBuild = "262.*",
         bunch = "212",
         targetCompatibilityLevel = JavaVersion.VERSION_21,
-        jvmTarget = "21"
+        jvmTarget = "25",
+        jdkVersion = 25
     ),
     BuildData(
         ideaSDKShortVersion = "2026.1",
@@ -185,6 +187,12 @@ project(":") {
             java.srcDirs("gen", "src/main/compat")
             resources.exclude("debugger/**")
             resources.exclude("std/**")
+        }
+    }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(buildVersionData.jdkVersion))
         }
     }
 
