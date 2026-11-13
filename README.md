@@ -91,14 +91,15 @@ QQ交流群：1群：`29850775` 2群：`529914962`
 
 ## Build environment requirements
 
-- JDK 21
+- JDK 21 to run Gradle
+- JDK 25 to build IntelliJ Platform 2026.2 and 2026.3
 - Setup environment variables as following:
 
         JAVA_HOME="path to JDK 21"
         
 ## Building
 
-  `./gradlew buildPlugin -DIDEA_VER=2026.2`
+  `./gradlew buildPlugin -DIDEA_VER=2026.3`
 
 ## Developed By
 

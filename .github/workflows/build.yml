@@ -36,6 +36,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Build 2026.3
+        run: ./gradlew buildPlugin -DIDEA_VER=2026.3 -Porg.gradle.java.installations.paths="${{ steps.setup-jdk-25.outputs.path }}"
+
       - name: Build 2026.2
         run: ./gradlew buildPlugin -DIDEA_VER=2026.2 -Porg.gradle.java.installations.paths="${{ steps.setup-jdk-25.outputs.path }}"
 

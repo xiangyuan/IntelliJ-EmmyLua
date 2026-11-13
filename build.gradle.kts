@@ -39,10 +39,22 @@ data class BuildData(
     val bunch: String = ideaSDKShortVersion,
     // https://github.com/JetBrains/gradle-intellij-plugin/issues/403#issuecomment-542890849
     val instrumentCodeCompilerVersion: String = ideaSDKVersion,
-    val jdkVersion: Int = 21
+    val jdkVersion: Int = 21,
+    val explicitXDebuggerModules: Boolean = false
 )
 
 val buildDataList = listOf(
+    BuildData(
+        ideaSDKShortVersion = "2026.3",
+        ideaSDKVersion = "2026.3",
+        sinceBuild = "263",
+        untilBuild = "263.*",
+        bunch = "212",
+        targetCompatibilityLevel = JavaVersion.VERSION_21,
+        jvmTarget = "21",
+        jdkVersion = 25,
+        explicitXDebuggerModules = true
+    ),
     BuildData(
         ideaSDKShortVersion = "2026.2",
         ideaSDKVersion = "2026.2",
@@ -50,7 +62,7 @@ val buildDataList = listOf(
         untilBuild = "262.*",
         bunch = "212",
         targetCompatibilityLevel = JavaVersion.VERSION_21,
-        jvmTarget = "25",
+        jvmTarget = "21",
         jdkVersion = 25
     ),
     BuildData(
@@ -179,6 +191,10 @@ project(":") {
         intellijPlatform {
             intellijIdea(buildVersionData.ideaSDKShortVersion)
             bundledModule("intellij.spellchecker")
+            if (buildVersionData.explicitXDebuggerModules) {
+                bundledModule("intellij.platform.debugger")
+                bundledModule("intellij.platform.debugger.impl.shared")
+            }
         }
     }
 
@@ -191,6 +207,8 @@ project(":") {
     }
 
     java {
+        sourceCompatibility = buildVersionData.targetCompatibilityLevel
+        targetCompatibility = buildVersionData.targetCompatibilityLevel
         toolchain {
             languageVersion.set(JavaLanguageVersion.of(buildVersionData.jdkVersion))
         }
